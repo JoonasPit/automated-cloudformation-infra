@@ -1,0 +1,19 @@
+{
+    "Outputs": {
+        "AkefalosSecondBucket": {
+            "Description": "Name",
+            "Value": {
+                "Ref": "AkefalosSecondBucket"
+            }
+        }
+    },
+    "Resources": {
+        "AkefalosSecondBucket": {
+            "Properties": {
+                "AccessControl": "Private",
+                "BucketName": "akefalos-lambda-bucket"
+            },
+            "Type": "AWS::S3::Bucket"
+        }
+    }
+}
