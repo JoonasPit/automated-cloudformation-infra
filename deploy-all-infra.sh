@@ -1,18 +1,17 @@
 #! /bin/bash
 cd "$(dirname "$0")"
-while getopts t:j: flag
+while getopts i:o: flag
 do
     case "${flag}" in
-        t) templatecreation=${OPTARG};;
-        j) jsonfolder=${OPTARG};;
+        i) infrafolder=${OPTARG};;
+        o) outputfolder=${OPTARG};;
         esac
 done
 
-echo "Creating templates from $templatecreation"
-python3 $PWD/$templatecreation.py
+python3 $PWD/create_templates.py $PWD/$infrafolder $PWD/$outputfolder
 
-echo "Deploying from folder: $jsonfolder"
-for file in $PWD/$jsonfolder/*.json
+echo "Deploying from folder: $outputfolder"
+for file in $PWD/$outputfolder/*.json
 do
     base=$(basename $file)
     stackname=${base%%.*};

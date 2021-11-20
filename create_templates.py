@@ -3,8 +3,10 @@ from pathlib import Path
 import subprocess
 import sys
 
-template_dir = sys.argv[1]
+infra_directory = sys.argv[1]
+output_directory =sys.argv[2]
 
-for file in listdir(template_dir): 
-   json_filename = path.basename(f"{template_dir}/{file}").split('.')[0]
-   subprocess.run(["python3", f"{template_dir}/{file}", f"{json_filename}.json"])
+for file in listdir(infra_directory):
+   json_filename = path.basename(f"{infra_directory}/{file}").split('.')[0]
+   with open(f"{output_directory}/{json_filename}.json", "w") as output:
+      subprocess.call(["python3", f"{infra_directory}/{file}"], stdout=output);

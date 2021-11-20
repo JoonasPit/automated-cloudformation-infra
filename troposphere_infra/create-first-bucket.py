@@ -4,8 +4,6 @@ from troposphere.s3 import Bucket, Private
 import sys
 
 t = Template()
-output_file = sys.argv[1]
-output_folder=sys.argv[2]
 
 bucket_name="akefalos-lambda-bucket"
 
@@ -26,5 +24,5 @@ t.add_output(
 
     )
 )
-with open(f"{output_folder}/{output_file}", "w") as file:
-    file.write(t.to_json())
+
+print(t.to_json())
