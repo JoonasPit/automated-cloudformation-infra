@@ -1,5 +1,5 @@
 
-from troposphere import Output, Ref, Template
+from troposphere import Output, Ref, Template, Export
 from troposphere.s3 import Bucket, Private
 import sys
 
@@ -20,7 +20,8 @@ t.add_output(
     Output(
         "AkefalosSecondBucket",
         Value=Ref(s3bucket),
-        Description="Name"
+        Description="Name",
+        Export=Export("AkefalosSecondBucket")
 
     )
 )

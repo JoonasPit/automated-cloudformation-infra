@@ -1,5 +1,4 @@
 #! /bin/bash
-cd "$(dirname "$0")"
 while getopts i:o: flag
 do
     case "${flag}" in
@@ -15,5 +14,5 @@ for file in $PWD/$outputfolder/*.json
 do
     base=$(basename $file)
     stackname=${base%%.*};
-    aws cloudformation deploy --template-file $file --stack-name $stackname 
+    aws cloudformation deploy --template-file $file --stack-name $stackname  --capabilities CAPABILITY_IAM
 done
