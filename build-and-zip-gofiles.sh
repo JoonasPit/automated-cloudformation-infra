@@ -1,7 +1,7 @@
 #! /bin/bash
 
 lambdafolder="$PWD/lambdas/scripts"
-zipfolder="~/lambdas/zips"
+zipfolder="$PWD/lambdas/zips"
 
 for folder in $lambdafolder/*
 do
