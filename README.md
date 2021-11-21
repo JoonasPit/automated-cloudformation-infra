@@ -1,5 +1,5 @@
-# automated-cloudformation-infra
-Troposphere and shellscript based AWS infrastructure automation
+# Automated-cloudformation-infra
+Troposphere and shellscript based AWS infrastructure automation. Feel free to clone and edit for personal usage. The entirety of this is just set up to gain more knowledge on troposphere and AWS-services
 
 
 Requires aws-cli installed and aws-credentials set up
