@@ -1,6 +1,6 @@
 from typing import Type
-from troposphere import GetAtt, ImportValue, Template, Ref, Join
-from troposphere.apigateway import ApiStage, EndpointConfiguration, Integration, Resource, RestApi, Method, Deployment,Stage
+from troposphere import GetAtt, ImportValue, Template, Ref, Join, Output
+from troposphere.apigateway import ApiKey, ApiStage, EndpointConfiguration, Integration, Resource, RestApi, Method, Deployment,Stage, StageKey, UsagePlan, UsagePlanKey
 from troposphere.iam import Role, Policy
 from os import getenv
 t = Template()
@@ -71,6 +71,7 @@ akefalos_method = t.add_resource(
     Method(
         "AkefalosLambdaMethod",
         RestApiId=Ref(akefalos_api),
+        ApiKeyRequired=True,
         AuthorizationType="NONE",
         ResourceId=Ref(akefalos_api_resource),
         HttpMethod="GET",
@@ -105,5 +106,43 @@ stage = t.add_resource(
         DeploymentId=Ref(akefalos_api_deployment)
     )
 )
+
+akefalos_api_key = t.add_resource(
+    ApiKey(
+        "ApiKey",
+         StageKeys=[
+             StageKey(
+             RestApiId=Ref(akefalos_api), StageName=Ref(stage)
+             )
+             ]
+    )
+)
+
+akefalos_usage_plan = t.add_resource(
+    UsagePlan(
+        "ExampleUsagePlan",
+        UsagePlanName="ExampleUsagePlan",
+        Description="Example usage plan",
+        ApiStages=[
+            ApiStage(
+                ApiId=Ref(akefalos_api),
+                Stage=Ref(stage),
+            )
+        ],
+    )
+)
+
+# tie the usage plan and key together
+usagePlanKey = t.add_resource(
+    UsagePlanKey(
+        "UsagePlanKey",
+        KeyId=Ref(akefalos_api_key),
+        KeyType="API_KEY",
+        UsagePlanId=Ref(akefalos_usage_plan),
+    )
+)
+
+
+t.add_output(Output("ApiKey", Value=Ref(akefalos_api_key), Description="API key"))
 
 print(t.to_json())
