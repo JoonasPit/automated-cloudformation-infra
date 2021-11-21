@@ -12,7 +12,7 @@ outputfolder=$PWD/$cloudformation_infrastructure
 base=$(basename $scripttorun)
 filerootname=${base%%.*};
 filenameasjson="$filerootname.json"
-python3 $scripttorun >> $outputfolder/$filenameasjson
+python3 $scripttorun > $outputfolder/$filenameasjson
 echo "Deploying from folder: $cloudformation_infrastructure"
 
-aws cloudformation deploy --template-file "$PWD/$cloudformation_infrastructure/$filenameasjson" --stack-name $filerootname
+aws cloudformation deploy --template-file "$PWD/$cloudformation_infrastructure/$filenameasjson" --stack-name $filerootname --capabilities CAPABILITY_IAM
