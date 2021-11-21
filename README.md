@@ -14,6 +14,6 @@ To create and deploy all stacks written in your infrastructure folder run
 
 `./deploy-all-infra.sh -i <input_folder> -o <output-folder>`
 
-To build and zip all gofiles in folders under lambdas run - Will add a script that automatically pushes said files to s3 and updates all lambda code at once - current move function is slightly broken.
+To build and zip all gofiles in folders under lambdas run - Will add a script that automatically pushes said files to s3 and updates all lambda code at once
 
-`/build-and-zip-gofiles.sh`
+`./build-and-zip-gofiles.sh`
