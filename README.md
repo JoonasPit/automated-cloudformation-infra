@@ -1,4 +1,4 @@
-# automated-cloudformation-infra
+# Automated-cloudformation-infra
 Troposphere and shellscript based AWS infrastructure automation
 
 
